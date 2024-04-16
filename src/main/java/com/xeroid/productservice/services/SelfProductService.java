@@ -1,5 +1,6 @@
 package com.xeroid.productservice.services;
 
+import com.xeroid.productservice.exceptions.CategoryNotFoundException;
 import com.xeroid.productservice.exceptions.ProductNotFoundException;
 import com.xeroid.productservice.models.Category;
 import com.xeroid.productservice.models.Product;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("selfProductService")
+//@Primary
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
@@ -46,6 +48,12 @@ public class SelfProductService implements ProductService {
 
         Product product1 = productRepository.save(product);
         Optional<Category> optionalCategory = categoryRepository.findById(category.getId());
+
+        if (optionalCategory.isEmpty()) {
+            //The category that is passed in the input product in invalid.
+            throw new CategoryNotFoundException("Invalid category id passed");
+        }
+
         product1.setCategory(optionalCategory.get());
         return product1;
     }
