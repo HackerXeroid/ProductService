@@ -6,13 +6,14 @@ import com.xeroid.productservice.models.Category;
 import com.xeroid.productservice.models.Product;
 import com.xeroid.productservice.repositories.CategoryRepository;
 import com.xeroid.productservice.repositories.ProductRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Primary
 @Service("selfProductService")
-//@Primary
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;

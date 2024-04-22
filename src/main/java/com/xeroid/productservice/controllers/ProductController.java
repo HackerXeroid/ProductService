@@ -19,10 +19,8 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable("id") Long id) {
         return productService.getProductById(id);
-
     }
 
-    //localhost:8080/products
     @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
